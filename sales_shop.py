@@ -44,7 +44,7 @@ class sales_shop:
             for keys, values in dic.items():
                 print("{} remains: Small size {}, Medium size {}".format(keys, values[0], values[1]))
         elif not prod or prod not in dic:
-            print("Invalid Querry option")
+            print("Invalid Query option")
         else:
             for keys, values in dic.items():
                 if prod == keys:
@@ -65,9 +65,27 @@ def rem(inp):
 def check(*args):
     if args[0].capitalize() in sales_shop().option:
         if args[1].capitalize() in sales_shop().lis:
-            rem(arg[1])
+            rem(args[1])
+        else:
+            loop_product(args[1])
     else:
         loop(arg[0])
+
+
+def loop(valid):
+    if valid.capitalize() not in sales_shop().option:
+        print("Invalid Command, try again:")
+        new = input("Command$ ")
+        new = new.split()
+        check(new[0], new[1])
+
+
+def loop_product(prd):
+    if prd.capitalize() not in sales_shop().lis:
+        print("Invalid Product, try again:")
+        new = input("Command$ ")
+        new = new.split()
+        check(new[0], new[1])
 
 
 print("1 : Customer\n2 : Seller")
@@ -88,16 +106,3 @@ elif quad == 2:
     command = input("Command$ ")
     arg = command.split(" ")
     check(arg[0], arg[1])
-
-
-def loop(valid):
-    while True:
-        if valid.capitalize() not in sales_shop().option:
-            print("Invalid Product, try again:")
-            law = input("Command$ ")
-            
-
-
-    else:
-        print("Invalid Command, try again:")
-        command = input("Command$ ")
