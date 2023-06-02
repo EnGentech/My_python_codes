@@ -1,7 +1,7 @@
 import os
 import sys
 class sales_shop:
-    lis = ["Meat_pie", "Juice", "Ice_cream"]
+    lis = ["Meat_pie", "Juice", "Ice_cream", "All"]
     option = ["Query"]
     def __int__(self):
         self.ss = ""
@@ -64,10 +64,19 @@ def rem(inp):
 
 def check(*args):
     if args[0].capitalize() in sales_shop().option:
-        if args[1].capitalize() in sales_shop().lis:
-            rem(args[1])
+        if len(args) > 1:
+            if args[1].capitalize() in sales_shop().lis:
+                rem(args[1])
+            else:
+                loop_product(args[1])
         else:
-            loop_product(args[1])
+            print("No product selected")
+            new = input("Command$ ")
+            new = new.split()
+            if len(new) > 1:
+                check(new[0], new[1])
+            else:
+                check(new[0])
     else:
         loop(arg[0])
 
@@ -77,7 +86,10 @@ def loop(valid):
         print("Invalid Command, try again:")
         new = input("Command$ ")
         new = new.split()
-        check(new[0], new[1])
+        if len(new) > 1:
+            check(new[0], new[1])
+        else:
+            check(new[0])
 
 
 def loop_product(prd):
@@ -85,24 +97,28 @@ def loop_product(prd):
         print("Invalid Product, try again:")
         new = input("Command$ ")
         new = new.split()
-        check(new[0], new[1])
+        if len(new) > 1:
+            check(new[0], new[1])
+        else:
+            check(new[0])
 
 
-print("1 : Customer\n2 : Seller")
-quad = int(input("\nSelect 1 if you are a customer, or 2 if you are a seller\t\t"))
-arg = ""
+print("\n========== Welcome to your Service assistance ==========")
+print("Select 1 if you are a customer, or 2 if you are a seller\t")
+quad = input("Command$ ")
+
 while True:
-    if quad == 1 or quad == 2:
-        break
+    if quad == "1":
+        print("To be carried out later. bye for now")
+        sys.exit()
+
+    elif quad == "2":
+        print("\nTo query, please key in the command Query with the product\ne.g Query Juice\n")
+        command = input("Command$ ")
+        arg = command.split(" ")
+        if len(arg) > 1:
+            check(arg[0], arg[1])
+        else:
+            check(arg[0])
     else:
-        quad = int(input("Invalid selection, try again: "))
-
-if quad == 1:
-    print("to be carried out later. bye for now")
-    sys.exit()
-
-elif quad == 2:
-    print("\nwelcome, to query, please key in the command Query with the product\ne.g Query Juice\n")
-    command = input("Command$ ")
-    arg = command.split(" ")
-    check(arg[0], arg[1])
+        quad = input("Invalid selection, try again: ")
