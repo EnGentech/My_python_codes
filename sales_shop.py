@@ -43,6 +43,8 @@ class sales_shop:
         if prod == "All":
             for keys, values in dic.items():
                 print("{} remains: Small size {}, Medium size {}".format(keys, values[0], values[1]))
+            print("")
+            print("======= Enter new command =======")
         elif not prod or prod not in dic:
             print("Invalid Query option")
         else:
@@ -53,7 +55,8 @@ class sales_shop:
                             print("Small-size remains {}.".format(values[0]))
                             break
                         while i == 1:
-                            print("Medium-size remains {}.".format(values[1]))
+                            print("Medium-size remains {}.\n".format(values[1]))
+                            print("======= Enter new command =======")
                             break
 
 
@@ -86,7 +89,9 @@ def loop(valid):
         print("Invalid Command, try again:")
         new = input("Command$ ")
         new = new.split()
-        if len(new) > 1:
+        if arg[0].capitalize() == "Quit":
+            sys.exit()
+        elif len(new) > 1:
             check(new[0], new[1])
         else:
             check(new[0])
@@ -97,7 +102,9 @@ def loop_product(prd):
         print("Invalid Product, try again:")
         new = input("Command$ ")
         new = new.split()
-        if len(new) > 1:
+        if arg[0].capitalize() == "Quit":
+            sys.exit()
+        elif len(new) > 1:
             check(new[0], new[1])
         else:
             check(new[0])
@@ -105,7 +112,9 @@ def loop_product(prd):
 
 print("\n========== Welcome to your Service assistance ==========")
 print("Select 1 if you are a customer, or 2 if you are a seller\t")
-quad = input("Command$ ")
+quad = input("Selection$ ")
+if quad == "2":
+    print("\nEnter Query to query products or Quit to terminate CLI\ne.g Query Juice\n")
 
 while True:
     if quad == "1":
@@ -113,10 +122,12 @@ while True:
         sys.exit()
 
     elif quad == "2":
-        print("\nTo query, please key in the command Query with the product\ne.g Query Juice\n")
+
         command = input("Command$ ")
         arg = command.split(" ")
-        if len(arg) > 1:
+        if arg[0].capitalize() == "Quit":
+            sys.exit()
+        elif len(arg) > 1:
             check(arg[0], arg[1])
         else:
             check(arg[0])
