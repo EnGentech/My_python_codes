@@ -138,7 +138,7 @@ def size():
 
 def test():
     try:
-        siz = int(input("Sizes$ "))
+        siz = int(input("Size$ "))
         if 1 <= siz <= len(sales_shop().sizes):
             return siz
             pass
