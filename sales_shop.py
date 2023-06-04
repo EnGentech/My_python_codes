@@ -206,7 +206,7 @@ def customer(customer_choice):
                 payment()
             elif proceed.capitalize() == "No":
                 print("\n== Do you wish to reduce your quantity, Enter yes or no ==")
-                reduction = input("Option$ ")
+                reduction = yes_or_no()
                 if reduction.capitalize() == "Yes":
                     customer(customer_choice)
                 elif reduction.capitalize() == "No":
