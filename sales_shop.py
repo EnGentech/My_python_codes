@@ -141,6 +141,11 @@ def test():
         return siz
 
 
+def yes_or_no():
+    y_n = input("\tPlease choose Yes or No$ ")
+    return y_n
+
+
 def customer(customer_choice):
     storage_result = size()
     print("\n=== Nice Option ===\nPlease enter your desired Quantity")
@@ -150,27 +155,36 @@ def customer(customer_choice):
         pos = a.lis[int(customer_choice)-1]
     else:
         pos = customer_choice
-    getattr(a, pos)()
+    getattr(a, pos.capitalize())()
     ms = getattr(a, 'qty_ms')
     ss = getattr(a, 'qty_ss')
+    ss_amount = getattr(a, 'ss')
+    ms_amount = getattr(a, 'ms')
     if storage_result == 1:
         xs = ss
+        xs_amount = quantity * ss_amount
     else:
         xs = ms
+        xs_amount = quantity * ms_amount
+
     while True:
         if quantity >= xs:
             print("\n=== Sorry We dont have the amount you require, could you please reduce the quantity? ===")
             print("\tWe are left with {} items under this selection...".format(xs))
-            y_n = input("\tPlease choose Yes or No$ ")
+
+            y_n = yes_or_no()
             if y_n.capitalize() == "Yes":
                 customer(customer_choice)
             elif y_n.capitalize() == "No":
                 print("\n=== Hope to satisfy you soon ===\n\t\t== Good-Bye ==")
                 sys.exit()
-            else:
-                while True:
-                    print("Invalid")
-                    y_n = input("\tPlease choose Yes or No$ ")
+        else:
+            print(xs_amount)
+            payment()
+
+
+def payment():
+    sys.exit()
 
 
 print("\n========== Welcome to your Service assistance ==========")
