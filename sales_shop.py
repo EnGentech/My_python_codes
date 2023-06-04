@@ -86,7 +86,7 @@ def check(*args):
             else:
                 check(new[0])
     else:
-        loop(arg[0])
+        loop(args[0])
 
 
 def loop(valid):
