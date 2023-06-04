@@ -228,7 +228,7 @@ def payment():
     print("\n=== Thank you for choosing EnGentech ===")
     print("Please wait for your receipt")
     print("=== Processing, please wait... ===")
-    time.sleep(3)
+    time.sleep(10)
     print("\n         =======Thank you for your patience=======")
     print("Please proceed to the Carbin for your payment with the receipt ")
     print("== Do you wish to perform additional transaction, select yes or no ==")
