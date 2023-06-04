@@ -211,6 +211,7 @@ def customer(customer_choice):
                     customer(customer_choice)
                 elif reduction.capitalize() == "No":
                     print("\n=== Hope to satisfy you soon ===\n\t\t== Good-Bye ==")
+                    sys.exit()
 
 
 def qty():
