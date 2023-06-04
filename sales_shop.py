@@ -1,8 +1,12 @@
 import os
 import sys
+
 class sales_shop:
     lis = ["Meat_pie", "Juice", "Ice_cream", "All"]
+    bullet = str([1, 2, 3])
     option = ["Query"]
+    sizes = ["Small-size", "Medium-size"]
+    picked_size = ""
     def __int__(self):
         self.ss = ""
         self.ms = ""
@@ -85,13 +89,15 @@ def check(*args):
 
 
 def loop(valid):
-    if valid.capitalize() not in sales_shop().option:
+    if valid.capitalize() == "Quit":
+        sys.exit()
+    elif valid.capitalize() not in sales_shop().option:
         print("Invalid Command, try again:")
         new = input("Command$ ")
         new = new.split()
-        if arg[0].capitalize() == "Quit":
+        if new[0].capitalize() == "Quit":
             sys.exit()
-        elif len(new) > 1:
+        if len(new) > 1:
             check(new[0], new[1])
         else:
             check(new[0])
@@ -102,12 +108,69 @@ def loop_product(prd):
         print("Invalid Product, try again:")
         new = input("Command$ ")
         new = new.split()
-        if arg[0].capitalize() == "Quit":
+        if new[0].capitalize() == "Quit":
             sys.exit()
-        elif len(new) > 1:
+        if len(new) > 1:
             check(new[0], new[1])
         else:
             check(new[0])
+
+
+def size():
+    print("\n=== Great Choice, Please Select your Size ===\nWe have:")
+    cun = 1
+    for itms in sales_shop().sizes:
+        print("{}. {}".format(cun, itms))
+        cun = cun + 1
+    store = test()
+    return store
+
+
+def test():
+    try:
+        siz = int(input("Sizes$ "))
+        if 1 <= siz <= len(sales_shop().sizes):
+            return siz
+            pass
+        elif siz > len(sales_shop().sizes):
+            print("Size exceeded, retry")
+            test()
+    except ValueError:
+        print("Only Integers are allowed, retry")
+        siz = test()
+        return siz
+
+
+def customer(customer_choice):
+    storage_result = size()
+    print("\n=== Nice Option ===\nPlease enter your desired Quantity")
+    quantity = int(input("Qty$ "))
+    a = sales_shop()
+    if customer_choice in a.bullet:
+        pos = a.lis[int(customer_choice)-1]
+    else:
+        pos = customer_choice
+    getattr(a, pos)()
+    ms = getattr(a, 'qty_ms')
+    ss = getattr(a, 'qty_ss')
+    if storage_result == 1:
+        xs = ss
+    else:
+        xs = ms
+    while True:
+        if quantity >= xs:
+            print("\n=== Sorry We dont have the amount you require, could you please reduce the quantity? ===")
+            print("\tWe are left with {} items under this selection...".format(xs))
+            y_n = input("\tPlease choose Yes or No$ ")
+            if y_n.capitalize() == "Yes":
+                customer(customer_choice)
+            elif y_n.capitalize() == "No":
+                print("\n=== Hope to satisfy you soon ===\n\t\t== Good-Bye ==")
+                sys.exit()
+            else:
+                while True:
+                    print("Invalid")
+                    y_n = input("\tPlease choose Yes or No$ ")
 
 
 print("\n========== Welcome to your Service assistance ==========")
@@ -118,11 +181,23 @@ if quad == "2":
 
 while True:
     if quad == "1":
-        print("To be carried out later. bye for now")
-        sys.exit()
+        count = 1
+        print("\n=== Welcome Customer ===\nOur Products include:")
+        for i in sales_shop().lis:
+            if i == "All":
+                continue
+            print("{}. {}".format(count, i))
+            count = count + 1
+        commodity = input("Choice$ ")
+        while True:
+            if commodity.capitalize() in sales_shop().lis or commodity in sales_shop().bullet:
+                customer(commodity)
+            else:
+                print("=== Product not available, retry ===")
+                commodity = input("Choice$ ")
 
     elif quad == "2":
-
+        print("=== Welcome Seller ===")
         command = input("Command$ ")
         arg = command.split(" ")
         if arg[0].capitalize() == "Quit":
