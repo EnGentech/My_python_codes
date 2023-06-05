@@ -2,12 +2,14 @@ import os
 import sys
 import time
 
+
 class sales_shop:
     lis = ["Meat_pie", "Juice", "Ice_cream", "All"]
     bullet = str([1, 2, 3])
     option = ["Query"]
     sizes = ["Small-size", "Medium-size"]
     picked_size = ""
+
     def __int__(self):
         self.ss = ""
         self.ms = ""
