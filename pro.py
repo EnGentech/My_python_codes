@@ -17,13 +17,14 @@ if __name__ == "__main__":
 
     Base.metadata.create_all(engine)
 
-    session = sessionmaker(bind=engine)
-    city_session = session()
+    session = sessionmaker()(bind=engine)
 
-    all_table = city_session.query(State, City).join(State)\
-        .order_by(City.id).all()
+    new_City = City(name="San Francisco")
+    new = State(name="California")
+    new.cities.append(new_City)
 
-    for x, y in all_table:
-        print("{}: ({}) {}".format(x.name, y.id, y.name))
+    session.add(new)
+
+    session.commit()
 
 # Coded be EnGentech

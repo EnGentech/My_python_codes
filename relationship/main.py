@@ -15,26 +15,19 @@ engine = create_engine(url, echo=True)
 
 """creating classes """
 
-class User(Base):
-    __tablename__ = "users"
-    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
-    name = Column(String(255), nullable=False)
-    nickname = Column(String(10), nullable=False)
-    #we reference the class Post while creating the relationship
-    posts = relationship('Post', backref='author')
-
+class parent(Base):
+    __tablename__ = "parents"
+    id = Column(Integer, autoincrement=True, primary_key=True, nullable=False)
+    name = Column(String(40), nullable=False)
+    child = relationship("Child", back_populates='parent', uselist = False)
     def __repr__(self):
-        return "<User =={}== ({})".format(self.id, self.name)
+        return "<Parent {}>".format(self.id)
 
-
-class Post(Base):
-    __tablename__ = "posts"
-    id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
-    title = Column(String(255), nullable=False)
-    content = Column(String(255), nullable=False)
-    user_id = Column(Integer, ForeignKey("users.id"))
-
+class Child(Base):
+    __tablename__ = "children"
+    id = Column(Integer, primary_key=True)
+    name = Column(String(25), nullable=False)
+    parent_id = Column(Integer, ForeignKey("parents.id"))
+    parent = relationship("Parent", back_populates='child')
     def __repr__(self):
-        return "<Post =={}== {} : {}".format(self.id, self.title, self.content)
-
-#Base.metadata.create_all(engine)
+        return "<Child {}>".format(self.id)
